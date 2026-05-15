@@ -1,0 +1,1629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mis Heroes | Ropa Infantil Funes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #b12a20;
+      --primary-dark: #8a1f16;
+      --secondary: #ffd166;
+      --accent: #e8c5c2;
+      --accent2: #f5e6e5;
+      --dark: #1a1a1a;
+      --gray: #6b7280;
+      --light: #fdf8f8;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 2px solid #e8c5c2;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--primary); }
+
+    .nav-cta {
+      background: var(--primary);
+      color: white !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 50px;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--primary-dark) !important; transform: scale(1.05); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 26px;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px;
+      transition: 0.3s;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 70px;
+      background: linear-gradient(135deg, #fdf5f5 0%, #fef9e7 50%, #fdf5f5 100%);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bubbles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .bubble:nth-child(1) { width: 300px; height: 300px; background: var(--primary); top: -80px; right: -80px; animation-delay: 0s; }
+    .bubble:nth-child(2) { width: 200px; height: 200px; background: var(--secondary); bottom: 10%; left: -60px; animation-delay: 1s; }
+    .bubble:nth-child(3) { width: 150px; height: 150px; background: var(--accent); top: 40%; right: 10%; animation-delay: 2s; }
+    .bubble:nth-child(4) { width: 100px; height: 100px; background: var(--accent2); top: 20%; left: 30%; animation-delay: 0.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: white;
+      border: 2px solid #f5e0de;
+      border-radius: 50px;
+      padding: 0.3rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1.2rem;
+      box-shadow: 0 2px 12px rgba(177,42,32,0.12);
+    }
+
+    .hero-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title .highlight {
+      color: var(--primary);
+      position: relative;
+    }
+
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .hero-sizes {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .size-chip {
+      background: white;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.78rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 50px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(177,42,32,0.4);
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(177,42,32,0.5);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 2.5px solid var(--primary);
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.85rem 2rem;
+      border-radius: 50px;
+      transition: all 0.25s;
+    }
+
+    .btn-outline:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-illustration {
+      width: min(420px, 100%);
+      aspect-ratio: 1;
+      background: white;
+      border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+      box-shadow: 0 20px 60px rgba(177,42,32,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: morph 8s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes morph {
+      0%, 100% { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; }
+      33% { border-radius: 60% 40% 40% 60% / 60% 60% 40% 40%; }
+      66% { border-radius: 50% 50% 60% 40% / 50% 40% 60% 50%; }
+    }
+
+    .stars-float {
+      position: absolute;
+      font-size: 1.5rem;
+      animation: spin-float 4s ease-in-out infinite;
+    }
+
+    .stars-float:nth-child(2) { top: 10%; right: 5%; animation-delay: 0.5s; }
+    .stars-float:nth-child(3) { bottom: 15%; left: 5%; animation-delay: 1s; font-size: 1rem; }
+    .stars-float:nth-child(4) { top: 30%; left: -5%; animation-delay: 1.5s; font-size: 1.2rem; }
+
+    @keyframes spin-float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(20deg); }
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--primary);
+      padding: 1.5rem 2rem;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      color: white;
+    }
+
+    .stat-num {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: #f5e0de;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-sub {
+      color: var(--gray);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; }
+
+    /* ── CATEGORIES ── */
+    #categorias { background: white; }
+
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .cat-card {
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      aspect-ratio: 0.75;
+      display: flex;
+      align-items: flex-end;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .cat-card:hover { transform: translateY(-6px); }
+
+    .cat-card:hover .cat-overlay { opacity: 0.75; }
+
+    .cat-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+    }
+
+    .cat-card:nth-child(1) .cat-bg { background: #e8d5f5; }
+    .cat-card:nth-child(2) .cat-bg { background: #d5e8f5; }
+    .cat-card:nth-child(3) .cat-bg { background: #d5f5e3; }
+
+    .cat-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .cat-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.55) 0%, transparent 55%);
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .cat-info {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem;
+      color: white;
+      width: 100%;
+    }
+
+    .cat-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(4px);
+      border-radius: 50px;
+      padding: 0.15rem 0.7rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .cat-name {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .cat-sizes { font-size: 0.85rem; font-weight: 700; opacity: 0.9; }
+
+    /* ── PRODUCTS ── */
+    #novedades { background: var(--light); }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(177,42,32,0.12);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--primary);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      z-index: 1;
+    }
+
+    .product-badge.verde { background: #27ae60; }
+    .product-badge.azul { background: var(--accent); color: var(--dark); }
+
+    .product-img {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .product-card:hover .product-img img {
+      transform: scale(1.06);
+    }
+
+    .wishlist-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .wishlist-btn:hover { transform: scale(1.15); }
+    .wishlist-btn.active { color: var(--primary); }
+
+    .product-body { padding: 1rem 1.2rem 1.2rem; }
+
+    .product-name {
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: var(--dark);
+    }
+
+    .product-desc {
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 0.75rem;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-weight: 900;
+      font-size: 1.1rem;
+      color: var(--primary);
+    }
+
+    .product-price span {
+      font-size: 0.78rem;
+      color: var(--gray);
+      text-decoration: line-through;
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    .buy-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .buy-btn:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    /* ── FEATURES ── */
+    #beneficios { background: white; }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: 20px;
+      background: var(--light);
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(177,42,32,0.08);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.2rem;
+    }
+
+    .fi1 { background: #f5e0de; }
+    .fi2 { background: #fff3cd; }
+    .fi3 { background: #d1f0e0; }
+    .fi4 { background: #d6eeff; }
+
+    .feature-title {
+      font-weight: 800;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-desc {
+      font-size: 0.88rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    /* ── TESTIMONIALS ── */
+    #testimonios { background: linear-gradient(135deg, #fdf5f5, #fdf8f0); }
+
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .test-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.8rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.05);
+      transition: transform 0.3s;
+    }
+
+    .test-card:hover { transform: translateY(-4px); }
+
+    .test-stars { font-size: 1.2rem; margin-bottom: 0.8rem; }
+
+    .test-text {
+      font-size: 0.95rem;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+      font-style: italic;
+    }
+
+    .test-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .test-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .ta1 { background: #f5e0de; }
+    .ta2 { background: #d6eeff; }
+    .ta3 { background: #d1f0e0; }
+
+    .test-name { font-weight: 800; font-size: 0.95rem; }
+    .test-handle { font-size: 0.8rem; color: var(--primary); }
+
+    /* ── HORARIOS ── */
+    #contacto { background: white; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .contact-info h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .info-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      border-radius: 14px;
+      background: var(--light);
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .ii1 { background: #f5e0de; }
+    .ii2 { background: #fff3cd; }
+    .ii3 { background: #d1f0e0; }
+    .ii4 { background: #d6eeff; }
+
+    .info-text strong {
+      display: block;
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .info-text p { font-size: 0.9rem; color: var(--gray); line-height: 1.5; }
+
+    .contact-cta {
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      border-radius: 28px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      color: white;
+      box-shadow: 0 12px 40px rgba(37,211,102,0.3);
+    }
+
+    .contact-cta .wa-icon { font-size: 4rem; margin-bottom: 1rem; display: block; }
+
+    .contact-cta h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.8rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .contact-cta p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
+
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: white;
+      color: #25d366;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 1.05rem;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .wa-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* ── INSTAGRAM FEED ── */
+    #instagram { background: var(--light); }
+
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.8rem;
+    }
+
+    .ig-item {
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+      background: #f0f0f0;
+      transition: transform 0.3s;
+    }
+
+    .ig-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .ig-item:hover { transform: scale(1.03); }
+    .ig-item:hover img { transform: scale(1.08); }
+    .ig-item:hover .ig-overlay { opacity: 1; }
+
+    .ig-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(177,42,32,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.4rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 2rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-brand .nav-logo { color: var(--primary); font-size: 2rem; display: block; margin-bottom: 1rem; }
+
+    .footer-brand p { font-size: 0.9rem; color: #9ca3af; line-height: 1.7; margin-bottom: 1.2rem; }
+
+    .social-links { display: flex; gap: 0.8rem; }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+
+    .social-link:hover { transform: scale(1.1); }
+    .sl-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .sl-fb { background: #1877f2; }
+    .sl-wa { background: #25d366; }
+
+    .footer-col h4 {
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .footer-col ul a {
+      text-decoration: none;
+      color: #9ca3af;
+      font-size: 0.88rem;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul a:hover { color: var(--primary); }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid #374151;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom p { font-size: 0.82rem; color: #6b7280; }
+    .footer-bottom a { color: var(--primary); text-decoration: none; }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.5rem;
+    }
+
+    .wa-float-bubble {
+      background: white;
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--dark);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      animation: pulse-bubble 2s ease-in-out infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes pulse-bubble {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .wa-float-btn {
+      width: 60px;
+      height: 60px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      animation: pulse-wa 2s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+
+    .wa-float-btn:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+      50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7), 0 0 0 12px rgba(37,211,102,0.1); }
+    }
+
+    /* ── PROMO BANNER ── */
+    .promo-banner {
+      background: linear-gradient(90deg, var(--secondary), #ffa726, var(--secondary));
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+      padding: 0.7rem;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--dark);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+    .modal {
+      background: white;
+      border-radius: 24px;
+      padding: 2rem;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      transform: scale(0.9);
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .modal-overlay.open .modal { transform: scale(1); }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--gray);
+    }
+
+    .modal h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin: 1rem 0 0.5rem;
+    }
+
+    .modal p { color: var(--gray); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+
+    .modal .emoji-big { font-size: 3rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .hero-image { order: -1; }
+      .hero-illustration { width: 250px; }
+      .hero-btns { justify-content: center; }
+      .hero-sizes { justify-content: center; }
+      .cat-grid { grid-template-columns: 1fr 1fr; }
+      .cat-card:last-child { grid-column: 1 / -1; aspect-ratio: 1.5; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .ig-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: white;
+        padding: 1.5rem 2rem;
+        gap: 1.2rem;
+        border-bottom: 2px solid #e8c5c2;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      }
+      .cat-grid { grid-template-columns: 1fr; }
+      .cat-card:last-child { grid-column: auto; aspect-ratio: 0.75; }
+      .footer-inner { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  🎉 ¡Nuevos ingresos de temporada! Talles del 00 al 18 + Teens · Funes, Santa Fe 🎉
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo"><img src="logo.png" alt="Mis Heroes"></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#categorias">Categorías</a></li>
+    <li><a href="#novedades">Novedades</a></li>
+    <li><a href="#testimonios">Reseñas</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li>
+      <a href="https://wa.me/543415884977?text=Hola%20Mis%20Heroes!%20Vi%20su%20tienda%20y%20me%20gustar%C3%ADa%20consultar%20sobre%20sus%20productos%20%F0%9F%91%B6"
+         target="_blank" class="nav-cta">📲 WhatsApp</a>
+    </li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bubbles">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">🌟 La tienda de tus pequeños héroes</div>
+      <h1 class="hero-title">
+        Vestí a tu<br>
+        <span class="highlight">pequeño héroe</span><br>
+        con amor
+      </h1>
+      <p class="hero-subtitle">
+        Ropa de calidad para bebés, niños y teens en Funes. Encontrá las mejores marcas con el estilo que a ellos les encanta.
+      </p>
+      <div class="hero-sizes">
+        <span class="size-chip">Bebé 00–6</span>
+        <span class="size-chip">Niños 6–12</span>
+        <span class="size-chip">Teens 12–18</span>
+        <span class="size-chip">Multivestimenta</span>
+      </div>
+      <div class="hero-btns">
+        <a href="#novedades" class="btn-primary">🛍️ Ver novedades</a>
+        <a href="https://wa.me/543415884977?text=Hola%20Mis%20Heroes!%20Quiero%20ver%20el%20cat%C3%A1logo%20completo%20%F0%9F%91%97"
+           target="_blank" class="btn-outline">💬 Consultar por WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="hero-illustration">
+        <img src="logo.png" alt="Mis Heroes" style="width:100%;height:100%;object-fit:contain;">
+        <span class="stars-float">⭐</span>
+        <span class="stars-float">🌈</span>
+        <span class="stars-float">✨</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">+6K</span>
+      <span class="stat-label">Seguidores en Instagram</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">00–18</span>
+      <span class="stat-label">Talles disponibles</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">+Teens</span>
+      <span class="stat-label">Línea adolescente</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">Lun–Sáb</span>
+      <span class="stat-label">Abiertos toda la semana</span>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORÍAS -->
+<section id="categorias">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Nuestras categorías</span>
+      <h2 class="section-title">¿Para quién buscás?</h2>
+      <p class="section-sub">Desde el recién nacido hasta el adolescente, tenemos todo lo que necesitás.</p>
+    </div>
+    <div class="cat-grid">
+      <a href="#novedades" class="cat-card">
+        <div class="cat-bg"><img src="fotos/superman_onesie.jpg" alt="Ropa bebés Mis Heroes"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-tag">⭐ Lo más tierno</span>
+          <span class="cat-name">Bebés</span>
+          <span class="cat-sizes">Talles 00 al 6</span>
+        </div>
+      </a>
+      <a href="#novedades" class="cat-card">
+        <div class="cat-bg"><img src="fotos/nena_rosa.jpg" alt="Ropa niños Mis Heroes"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-tag">🔥 Tendencia</span>
+          <span class="cat-name">Niños</span>
+          <span class="cat-sizes">Talles 6 al 12</span>
+        </div>
+      </a>
+      <a href="#novedades" class="cat-card">
+        <div class="cat-bg"><img src="fotos/teen_outfit.jpg" alt="Ropa teens Mis Heroes"></div>
+        <div class="cat-overlay"></div>
+        <div class="cat-info">
+          <span class="cat-tag">💫 Estilo propio</span>
+          <span class="cat-name">Teens</span>
+          <span class="cat-sizes">Talles 12 al 18+</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NOVEDADES -->
+<section id="novedades">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Nuevos ingresos</span>
+      <h2 class="section-title">Lo último en tienda</h2>
+      <p class="section-sub">Consultá disponibilidad y precios por WhatsApp.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card">
+        <span class="product-badge">🆕 Nuevo</span>
+        <div class="product-img"><img src="fotos/chaleco_polar.jpg" alt="Chaleco polar Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Chaleco Polar · $12.500</div>
+          <div class="product-desc">Varios colores · Talles 4 al 14</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Consulto%20por%20el%20conjunto%20beb%C3%A9%20primavera%20%F0%9F%91%B6"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge verde">🔥 Top venta</span>
+        <div class="product-img"><img src="fotos/jeans_teens.jpg" alt="Jeans teens Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Jeans Cargo Teens</div>
+          <div class="product-desc">Varios lavados · Talles 12 al 18</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Me%20interesa%20el%20buzo%20ni%C3%B1o%20estampado%20%F0%9F%91%95"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="fotos/superman_onesie.jpg" alt="Enterito Superman bebé Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Enterito Superman Bebé</div>
+          <div class="product-desc">Licencia oficial · Talles 00 al 4</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Quisiera%20ver%20el%20vestido%20floral%20nena%20%F0%9F%8C%B8"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge azul">✨ Oferta</span>
+        <div class="product-img"><img src="fotos/mujer_chaleco.jpg" alt="Chaleco niña Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Chaleco Acolchado Niña</div>
+          <div class="product-desc">Varios colores · Talles 4 al 12</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Consulto%20por%20el%20jean%20teen%20%F0%9F%91%96"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge">🆕 Nuevo</span>
+        <div class="product-img"><img src="fotos/medias_fun.jpg" alt="Medias divertidas Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Medias Divertidas Kids</div>
+          <div class="product-desc">Diseños exclusivos · Talles 2 al 10</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Me%20interesa%20el%20enterito%20beb%C3%A9%20%F0%9F%A7%B8"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="fotos/nena_rosa.jpg" alt="Remera y jean nena Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Remera + Jean Nena</div>
+          <div class="product-desc">Outfit completo · Talles 4 al 12</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Consulto%20por%20la%20campera%20nena%20%F0%9F%A7%A5"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <span class="product-badge verde">🔥 Top venta</span>
+        <div class="product-img"><img src="fotos/fantastic_set.jpg" alt="Set Fantastic 94 teens Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Set Fantastic 94 Teens</div>
+          <div class="product-desc">Top + Jean · Talles 12 al 18</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Quiero%20ver%20el%20set%20teen%20completo%20%F0%9F%91%A1"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img"><img src="fotos/teen_outfit.jpg" alt="Outfit teen Mis Heroes" loading="lazy"></div>
+        <button class="wishlist-btn" onclick="toggleWish(this)">🤍</button>
+        <div class="product-body">
+          <div class="product-name">Outfit Completo Teen</div>
+          <div class="product-desc">Colección nueva · Talles 12 al 18</div>
+          <div class="product-footer">
+            <div class="product-price">Consultá 💬</div>
+            <a href="https://wa.me/543415884977?text=Hola!%20Me%20interesa%20la%20remera%20nena%20estampada%20%F0%9F%8C%88"
+               target="_blank" class="buy-btn">Ver en WA</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">¿Por qué elegirnos?</span>
+      <h2 class="section-title">Tu confianza, nuestra misión</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi1">👗</div>
+        <div class="feature-title">Calidad garantizada</div>
+        <p class="feature-desc">Seleccionamos las mejores marcas y materiales para que tus hijos estén siempre cómodos y a la moda.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi2">📦</div>
+        <div class="feature-title">Amplio stock</div>
+        <p class="feature-desc">Talles del 00 al 18 + Teens. Siempre encontrás lo que buscás, en cualquier etapa del crecimiento.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi3">💬</div>
+        <div class="feature-title">Atención personalizada</div>
+        <p class="feature-desc">Te asesoramos por WhatsApp para encontrar la prenda perfecta según el talle y la ocasión.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi4">📍</div>
+        <div class="feature-title">En el corazón de Funes</div>
+        <p class="feature-desc">Local físico en Funes, Santa Fe. Vení a vernos de lunes a sábado y tocá la calidad de cada prenda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Reseñas</span>
+      <h2 class="section-title">Lo que dicen las mamás</h2>
+      <p class="section-sub">Más de 6.000 familias confían en Mis Heroes.</p>
+    </div>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">⭐⭐⭐⭐⭐</div>
+        <p class="test-text">"Compré el conjunto para mi bebé y llegó perfecto. La calidad es increíble y el talle justo. ¡Volvería a comprar mil veces!"</p>
+        <div class="test-author">
+          <div class="test-avatar ta1">👩</div>
+          <div>
+            <div class="test-name">Lucía Martínez</div>
+            <div class="test-handle">@lu.martinez · Instagram</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">⭐⭐⭐⭐⭐</div>
+        <p class="test-text">"Encontré todo para mis tres hijos en un solo lugar. Atención súper amable y envío rápido. ¡Muy recomendable!"</p>
+        <div class="test-author">
+          <div class="test-avatar ta2">👩‍👧‍👦</div>
+          <div>
+            <div class="test-name">Valentina Rodríguez</div>
+            <div class="test-handle">@valen_funes · Facebook</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">⭐⭐⭐⭐⭐</div>
+        <p class="test-text">"Me asesoraron re bien por WhatsApp para el talle de mi nena. El vestido le quedó divino para la fiestita de fin de año 🎉"</p>
+        <div class="test-author">
+          <div class="test-avatar ta3">👩</div>
+          <div>
+            <div class="test-name">Camila Torres</div>
+            <div class="test-handle">@cami_t · Instagram</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM FEED -->
+<section id="instagram">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Instagram</span>
+      <h2 class="section-title">Seguinos en Instagram</h2>
+      <p class="section-sub">Mirá las novedades en <strong>@mis_heroes_funes</strong> todos los días.</p>
+    </div>
+    <div class="ig-grid">
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/teen_local_01.jpg" alt="Teen en local Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/mujer_chaleco.jpg" alt="Chaleco Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/teen_outfit.jpg" alt="Outfit teen Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/superman_onesie.jpg" alt="Enterito Superman Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/nena_rosa.jpg" alt="Nena rosa Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/interior_local.jpg" alt="Interior local Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/fantastic_set.jpg" alt="Set Fantastic 94 Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="ig-item">
+        <img src="fotos/chaleco_polar.jpg" alt="Chaleco polar Mis Heroes" loading="lazy">
+        <div class="ig-overlay">📷 Ver post</div>
+      </a>
+    </div>
+    <div style="text-align:center; margin-top:2rem;">
+      <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="btn-outline">
+        📸 Ver más en Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Encontranos</span>
+      <h2 class="section-title">Visitanos o escribinos</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>¡Estamos para ayudarte!</h3>
+        <ul class="info-list">
+          <li class="info-item">
+            <div class="info-icon ii1">📍</div>
+            <div class="info-text">
+              <strong>Dónde estamos</strong>
+              <p>Funes, Santa Fe, Argentina</p>
+            </div>
+          </li>
+          <li class="info-item">
+            <div class="info-icon ii2">🕐</div>
+            <div class="info-text">
+              <strong>Horario de atención</strong>
+              <p>Lunes a Sábado<br>9:30 hs a 13:00 hs · 16:30 hs a 20:00 hs</p>
+            </div>
+          </li>
+          <li class="info-item">
+            <div class="info-icon ii3">📱</div>
+            <div class="info-text">
+              <strong>WhatsApp</strong>
+              <p>341 588-4977</p>
+            </div>
+          </li>
+          <li class="info-item">
+            <div class="info-icon ii4">📸</div>
+            <div class="info-text">
+              <strong>Redes sociales</strong>
+              <p>@mis_heroes_funes en Instagram y Facebook</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-cta">
+        <span class="wa-icon">💬</span>
+        <h3>¿Tenés dudas?</h3>
+        <p>Escribinos por WhatsApp y te respondemos al instante. Pedí tu catálogo, consultá talles o reservá tu prenda favorita.</p>
+        <a href="https://wa.me/543415884977?text=Hola%20Mis%20Heroes!%20Vi%20su%20tienda%20y%20quiero%20consultar%20sobre%20sus%20productos%20%F0%9F%91%97%F0%9F%91%B6"
+           target="_blank" class="wa-btn">
+          💬 Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo"><img src="logo.png" alt="Mis Heroes"></a>
+      <p>La tienda de ropa infantil y teen que toda familia necesita. Calidad, amor y estilo en cada prenda. Funes, Santa Fe.</p>
+      <div class="social-links">
+        <a href="https://www.instagram.com/mis_heroes_funes/" target="_blank" class="social-link sl-ig">📸</a>
+        <a href="https://www.facebook.com/p/Mis-Heroes-100064029130897/" target="_blank" class="social-link sl-fb">👍</a>
+        <a href="https://wa.me/543415884977" target="_blank" class="social-link sl-wa">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Categorías</h4>
+      <ul>
+        <li><a href="#novedades">Bebés (00–6)</a></li>
+        <li><a href="#novedades">Niños (6–12)</a></li>
+        <li><a href="#novedades">Teens (12–18)</a></li>
+        <li><a href="#novedades">Novedades</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tienda</h4>
+      <ul>
+        <li><a href="#beneficios">Por qué elegirnos</a></li>
+        <li><a href="#testimonios">Reseñas</a></li>
+        <li><a href="#contacto">Horarios</a></li>
+        <li><a href="https://wa.me/543415884977" target="_blank">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Mis Heroes · Funes, Santa Fe · Todos los derechos reservados.</p>
+    <p>Hecho con ❤️ para las familias de Funes</p>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<div class="wa-float">
+  <div class="wa-float-bubble">¡Consultá ahora! 👋</div>
+  <a href="https://wa.me/543415884977?text=Hola%20Mis%20Heroes!%20Vi%20su%20tienda%20online%20y%20quiero%20consultar%20%F0%9F%91%97"
+     target="_blank" class="wa-float-btn">💬</a>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <span class="emoji-big">🛒</span>
+    <h3>¡Prenda guardada!</h3>
+    <p>Tu lista de favoritos está lista. Mandanos un WhatsApp y te confirmamos disponibilidad y precio.</p>
+    <a href="https://wa.me/543415884977?text=Hola!%20Tengo%20favoritos%20guardados%20y%20quiero%20consultar%20disponibilidad%20%F0%9F%92%97"
+       target="_blank" class="btn-primary" style="display:inline-flex; margin-bottom:0.5rem;">
+      💬 Consultar por WhatsApp
+    </a>
+  </div>
+</div>
+
+<script>
+  // Menu toggle
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Close menu on link click
+  document.querySelectorAll('#navLinks a').forEach(a => {
+    a.addEventListener('click', () => {
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Wishlist toggle
+  let wishCount = 0;
+  function toggleWish(btn) {
+    if (btn.textContent === '🤍') {
+      btn.textContent = '❤️';
+      btn.classList.add('active');
+      wishCount++;
+      if (wishCount === 1) showModal();
+    } else {
+      btn.textContent = '🤍';
+      btn.classList.remove('active');
+    }
+  }
+
+  function showModal() {
+    document.getElementById('modalOverlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Navbar shadow on scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.boxShadow = window.scrollY > 10 ? '0 2px 20px rgba(0,0,0,0.08)' : 'none';
+  });
+
+  // Animate elements on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.product-card, .feature-card, .test-card, .cat-card, .info-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
