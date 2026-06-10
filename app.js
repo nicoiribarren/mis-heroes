@@ -109,32 +109,32 @@ function initSizeQuiz() {
   // Age lines mapping
   const quizData = {
     '0-12m': {
-      category: 'Bebés 👶',
+      category: 'Bebés',
       tag: 'babies',
       details: 'Para recién nacidos y bebés de hasta 1 año. Talles recomendados: **00 al 4**. Prendas de algodón ultra-suave e hipoalergénicas para proteger su piel.'
     },
     '1-2y': {
-      category: 'Bebés grandes 🍼',
+      category: 'Bebés grandes',
       tag: 'babies',
       details: 'Para pequeños exploradores de 1 a 2 años. Talles recomendados: **4 al 6**. Diseños cómodos y elásticos ideales para sus primeros pasos.'
     },
     '3-5y': {
-      category: 'Niños Kids 🎒',
+      category: 'Niños Kids',
       tag: 'kids',
       details: 'Para chicos inquietos de 3 a 5 años. Talles recomendados: **6 al 8**. Ropa resistente y colorida para jugar en el jardín y en casa.'
     },
     '6-9y': {
-      category: 'Niños Grandes 🛹',
+      category: 'Niños Grandes',
       tag: 'kids',
       details: 'Para chicos dinámicos de 6 a 9 años. Talles recomendados: **8 al 12**. Diseños modernos listos para la escuela, salidas y aventuras.'
     },
     '10-12y': {
-      category: 'Teens inicial 💫',
+      category: 'Teens inicial',
       tag: 'teens',
       details: 'Para pre-adolescentes de 10 a 12 años. Talles recomendados: **12 al 14**. Estilos a la moda con la comodidad que ellos empiezan a exigir.'
     },
     '13-14y': {
-      category: 'Teens / Adolescentes 🎧',
+      category: 'Teens / Adolescentes',
       tag: 'teens',
       details: 'Para adolescentes de 13 a 14+ años. Talles recomendados: **14 al 18+ (Teens)**. Colecciones urbanas con las últimas tendencias de la temporada.'
     }
@@ -170,7 +170,7 @@ function initSizeQuiz() {
           }
 
           // 3. Show a feedback Toast
-          showToast('🔍 Catálogo Filtrado', `Mostrando ropa para ${match.category}`, 'fotos/logo.png');
+          showToast('Catálogo filtrado', `Mostrando ropa para ${match.category}`, 'fotos/logo.png');
         };
 
         // Reveal the result box smoothly
@@ -237,7 +237,7 @@ window.addToCart = function(name, img, sizes, btn) {
   // Dynamic button feedback
   if (btn) {
     const originalContent = btn.innerHTML;
-    btn.innerHTML = '✅ Agregado';
+    btn.innerHTML = '✓ Agregado';
     btn.style.background = '#27ae60';
     btn.style.color = 'white';
     btn.style.transform = 'scale(1.05)';
@@ -262,7 +262,7 @@ window.addToCart = function(name, img, sizes, btn) {
   setTimeout(() => {
     openCart();
     // Trigger toast confirmation
-    showToast('🛒 Producto Añadido', `${name} (${sizes})`, img);
+    showToast('Producto añadido', `${name} (${sizes})`, img);
   }, 100);
 };
 
@@ -280,7 +280,7 @@ window.removeFromCart = function(index) {
       cartItems.splice(index, 1);
       updateCartUI();
       if (removedItem) {
-        showToast('🗑️ Eliminado del Carrito', removedItem.name, removedItem.img);
+        showToast('Eliminado del carrito', removedItem.name, removedItem.img);
       }
     }, 300);
   } else {
@@ -315,7 +315,7 @@ function updateCartUI() {
     if (body) {
       body.innerHTML = `
         <div class="cart-empty">
-          <span class="empty-icon">🛒</span>
+          <span class="empty-icon"><svg class="icon"><use href="#i-cart"/></svg></span>
           <p>Tu carrito está vacío.<br>¡Agregá productos para comenzar!</p>
         </div>
       `;
@@ -339,7 +339,7 @@ function updateCartUI() {
             <button class="qty-btn" onclick="changeQty(${i}, +1)">+</button>
           </div>
         </div>
-        <button class="cart-item-remove" onclick="removeFromCart(${i})" title="Eliminar">🗑️</button>
+        <button class="cart-item-remove" onclick="removeFromCart(${i})" title="Eliminar"><svg class="icon"><use href="#i-trash"/></svg></button>
       </div>
     `).join('');
   }
@@ -388,10 +388,10 @@ window.toggleWish = function(btn) {
   const card = btn.closest('.product-card');
   const productName = card ? card.querySelector('.product-name').textContent : 'Prenda';
   
-  if (btn.textContent.trim() === '🤍') {
-    btn.textContent = '❤️';
+  if (!btn.classList.contains('active')) {
+    btn.classList.add('active');
     wishCount++;
-    showToast('💖 Añadido a Favoritos', productName, card ? card.querySelector('.product-img img').src : '');
+    showToast('Añadido a favoritos', productName, card ? card.querySelector('.product-img img').src : '');
     
     if (wishCount === 1) {
       setTimeout(() => {
@@ -400,8 +400,8 @@ window.toggleWish = function(btn) {
       }, 500);
     }
   } else {
-    btn.textContent = '🤍';
-    showToast('🤍 Quitado de Favoritos', productName);
+    btn.classList.remove('active');
+    showToast('Quitado de favoritos', productName);
   }
 };
 
