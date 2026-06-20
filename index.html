@@ -32,6 +32,9 @@
   <symbol id="i-trash" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 6h18m-2 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
   <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1.5" fill="currentColor"/><circle cx="19" cy="21" r="1.5" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
   <symbol id="i-ruler" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M21.3 8.7 15.3 2.7a1 1 0 0 0-1.4 0l-11.2 11.2a1 1 0 0 0 0 1.4l6 6a1 1 0 0 0 1.4 0l11.2-11.2a1 1 0 0 0 0-1.4zM7.5 10.5l2 2m1-5l2 2m1-5l2 2"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M10 17h4V5H2v12h3m5 0H5m5 0a2 2 0 1 0 4 0m0 0h3m-3 0V8h4l3 4v5h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 9V7l1.5-3h15L21 7v2m-18 0a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M3 9v11a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9M9 21v-6h6v6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M20 6 9 17l-5-5"/></symbol>
 </svg>
 
   <!-- ELEMENTOS MÁGICOS DE CORTE LÚDICO (FLOTANTES SVG EN FONDO) -->
@@ -97,6 +100,43 @@
       </div>
     </div>
     <div class="cart-footer" id="cartFooter" style="display:none;">
+
+      <!-- MÉTODO DE ENTREGA -->
+      <div class="ship-block">
+        <div class="ship-title">¿Cómo querés recibirlo?</div>
+
+        <label class="ship-option selected" id="shipPickupOpt">
+          <input type="radio" name="shipMethod" value="pickup" checked onchange="selectShipMethod('pickup')">
+          <span class="ship-radio"></span>
+          <span class="ship-icon"><svg class="icon"><use href="#i-store"/></svg></span>
+          <span class="ship-opt-text">
+            <strong>Retiro en el local</strong>
+            <small>Presidente Perón 1953, Funes</small>
+          </span>
+          <span class="ship-price free">Gratis</span>
+        </label>
+
+        <label class="ship-option" id="shipDeliveryOpt">
+          <input type="radio" name="shipMethod" value="delivery" onchange="selectShipMethod('delivery')">
+          <span class="ship-radio"></span>
+          <span class="ship-icon"><svg class="icon"><use href="#i-truck"/></svg></span>
+          <span class="ship-opt-text">
+            <strong>Envío a domicilio</strong>
+            <small>Correo Argentino o Andreani</small>
+          </span>
+        </label>
+
+        <!-- Cotizador por código postal -->
+        <div class="ship-cp" id="shipCpBox">
+          <div class="ship-cp-row">
+            <input type="text" id="cpInput" inputmode="numeric" maxlength="4" placeholder="Código postal" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+            <button class="ship-cp-btn" onclick="quoteShipping()">Cotizar</button>
+          </div>
+          <div class="ship-carriers" id="shipCarriers"></div>
+          <p class="ship-disclaimer">Costos estimados. El valor final se confirma al despachar.</p>
+        </div>
+      </div>
+
       <div class="cart-total">
         <span>Total estimado:</span>
         <span id="cartTotal">Consultable</span>

@@ -2334,3 +2334,158 @@ footer {
 .contact-cta h3, .modal h3, .sf-title {
   font-weight: 800; letter-spacing: -0.01em;
 }
+
+/* ── MÉTODO DE ENTREGA (CARRITO) ── */
+.ship-block {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #f0e0de;
+}
+.ship-title {
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--dark);
+  margin-bottom: 0.7rem;
+}
+.ship-option {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.8rem;
+  border: 2px solid #eee0de;
+  border-radius: 14px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.ship-option:hover { border-color: var(--accent); }
+.ship-option.selected {
+  border-color: var(--primary);
+  background: #fdf5f5;
+}
+.ship-option input { position: absolute; opacity: 0; pointer-events: none; }
+.ship-radio {
+  width: 18px; height: 18px;
+  border: 2px solid #cbb8b6;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.ship-option.selected .ship-radio { border-color: var(--primary); }
+.ship-option.selected .ship-radio::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+.ship-icon {
+  color: var(--primary);
+  display: flex;
+  font-size: 1.15rem;
+  flex-shrink: 0;
+}
+.ship-opt-text { flex: 1; min-width: 0; line-height: 1.25; }
+.ship-opt-text strong { display: block; font-size: 0.86rem; font-weight: 800; }
+.ship-opt-text small { font-size: 0.74rem; color: var(--gray); }
+.ship-price {
+  font-weight: 900;
+  font-size: 0.82rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.ship-price.free { color: #1e8e5a; }
+
+/* Cotizador CP */
+.ship-cp {
+  display: none;
+  margin-top: 0.3rem;
+  padding: 0.8rem;
+  background: #faf3f2;
+  border-radius: 14px;
+  animation: fadeUp 0.35s ease;
+}
+.ship-cp.open { display: block; }
+.ship-cp-row { display: flex; gap: 0.5rem; }
+.ship-cp-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid #eccfcc;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.ship-cp-row input:focus { border-color: var(--primary); }
+.ship-cp-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0 1.1rem;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.ship-cp-btn:hover { background: var(--primary-dark); }
+
+.ship-carriers { margin-top: 0.7rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.carrier-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 0.7rem;
+  background: white;
+  border: 2px solid #eee0de;
+  border-radius: 11px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.carrier-opt:hover { border-color: var(--accent); }
+.carrier-opt.selected { border-color: var(--primary); background: #fdf5f5; }
+.carrier-logo {
+  width: 42px; height: 26px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.58rem;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+  text-align: center;
+  line-height: 1;
+}
+.logo-correo { background: #ffd100; color: #003087; }
+.logo-andreani { background: #e6007e; }
+.carrier-info { flex: 1; min-width: 0; line-height: 1.2; }
+.carrier-info strong { display: block; font-size: 0.8rem; font-weight: 800; }
+.carrier-info small { font-size: 0.72rem; color: var(--gray); }
+.carrier-price { font-weight: 900; font-size: 0.82rem; color: var(--primary); flex-shrink: 0; }
+.carrier-check {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid #cbb8b6;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+}
+.carrier-opt.selected .carrier-check { background: var(--primary); border-color: var(--primary); }
+.carrier-opt:not(.selected) .carrier-check .icon { display: none; }
+
+.ship-disclaimer {
+  font-size: 0.68rem;
+  color: var(--gray);
+  text-align: center;
+  margin-top: 0.6rem;
+  line-height: 1.4;
+}

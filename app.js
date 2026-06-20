@@ -224,6 +224,86 @@ window.showToast = function(title, desc, imgSrc = '') {
 /* ── 6. ELASTIC CART LOGIC WITH ANIMATED SIDEBAR ── */
 let cartItems = [];
 
+/* ──────────────────────────────────────────────────────────
+   MÓDULO DE ENVÍOS — Correo Argentino + Andreani
+   ──────────────────────────────────────────────────────────
+   API-READY: hoy las tarifas son estimadas por zona. Cuando
+   la dueña tenga cuenta de Correo Argentino y contrato con
+   Andreani, se reemplaza quoteShipping() por una llamada al
+   backend que consulta las APIs reales (ver TODO abajo).
+   ────────────────────────────────────────────────────────── */
+
+// Tarifas estimadas (paquete de ropa ~0.5-1 kg). Editables.
+const SHIPPING_RATES = {
+  cercano:  { correo: 3500, andreani: 4200, dias: '1 a 2 días hábiles', label: 'Rosario y alrededores' },
+  centro:   { correo: 5500, andreani: 6500, dias: '2 a 4 días hábiles', label: 'CABA, GBA y centro' },
+  nacional: { correo: 7500, andreani: 8900, dias: '3 a 6 días hábiles', label: 'Resto del país' }
+};
+
+// Clasifica el código postal argentino (4 dígitos) en una zona.
+function zoneFromCP(cp) {
+  const n = parseInt(cp, 10);
+  if (isNaN(n)) return null;
+  // Santa Fe sur / Rosario / Funes (CP 2000–2299) = zona cercana
+  if (n >= 2000 && n <= 2299) return 'cercano';
+  // CABA (1000–1499) y GBA / centro (1500–1999, 2300–2999) = zona centro
+  if ((n >= 1000 && n <= 1999) || (n >= 2300 && n <= 2999)) return 'centro';
+  // Resto del país
+  return 'nacional';
+}
+
+// Estado del envío seleccionado
+let shipState = { method: 'pickup', carrier: null, cost: 0, zone: null, cp: '' };
+
+window.selectShipMethod = function(method) {
+  shipState.method = method;
+  if (method === 'pickup') { shipState.carrier = null; shipState.cost = 0; }
+  document.getElementById('shipPickupOpt').classList.toggle('selected', method === 'pickup');
+  document.getElementById('shipDeliveryOpt').classList.toggle('selected', method === 'delivery');
+  document.getElementById('shipCpBox').classList.toggle('open', method === 'delivery');
+  updateCartUI();
+};
+
+window.quoteShipping = function() {
+  const cp = (document.getElementById('cpInput').value || '').trim();
+  const box = document.getElementById('shipCarriers');
+  if (cp.length !== 4) {
+    box.innerHTML = `<p class="ship-disclaimer" style="color:var(--primary);">Ingresá un código postal válido de 4 dígitos.</p>`;
+    return;
+  }
+  const zone = zoneFromCP(cp);
+  const r = SHIPPING_RATES[zone];
+  shipState.zone = zone;
+  shipState.cp = cp;
+
+  /* TODO (fase 2 - API real):
+     const rates = await fetch('/api/shipping?cp='+cp).then(r=>r.json());
+     y reemplazar r.correo / r.andreani por rates.correo / rates.andreani */
+
+  box.innerHTML = `
+    <div class="carrier-opt" onclick="selectCarrier('correo', ${r.correo})" id="carrierCorreo">
+      <span class="carrier-logo logo-correo">CORREO<br>AR</span>
+      <span class="carrier-info"><strong>Correo Argentino</strong><small>${r.dias}</small></span>
+      <span class="carrier-price">$${r.correo.toLocaleString('es-AR')}</span>
+      <span class="carrier-check"><svg class="icon"><use href="#i-check"/></svg></span>
+    </div>
+    <div class="carrier-opt" onclick="selectCarrier('andreani', ${r.andreani})" id="carrierAndreani">
+      <span class="carrier-logo logo-andreani">andreani</span>
+      <span class="carrier-info"><strong>Andreani</strong><small>${r.dias}</small></span>
+      <span class="carrier-price">$${r.andreani.toLocaleString('es-AR')}</span>
+      <span class="carrier-check"><svg class="icon"><use href="#i-check"/></svg></span>
+    </div>
+  `;
+};
+
+window.selectCarrier = function(carrier, cost) {
+  shipState.carrier = carrier;
+  shipState.cost = cost;
+  document.getElementById('carrierCorreo').classList.toggle('selected', carrier === 'correo');
+  document.getElementById('carrierAndreani').classList.toggle('selected', carrier === 'andreani');
+  updateCartUI();
+};
+
 window.addToCart = function(name, img, sizes, btn) {
   const existing = cartItems.find(item => item.name === name);
   if (existing) {
@@ -344,9 +424,24 @@ function updateCartUI() {
     `).join('');
   }
 
+  // ── Resumen de entrega ──
+  const totalEl = document.getElementById('cartTotal');
+  let shipLine = '';
+  if (shipState.method === 'pickup') {
+    if (totalEl) totalEl.textContent = 'Retiro gratis';
+    shipLine = '%0A%0AEntrega: Retiro en el local (Presidente Perón 1953, Funes)';
+  } else if (shipState.carrier) {
+    const name = shipState.carrier === 'correo' ? 'Correo Argentino' : 'Andreani';
+    if (totalEl) totalEl.textContent = '+ $' + shipState.cost.toLocaleString('es-AR') + ' envío';
+    shipLine = `%0A%0AEntrega: Envío a domicilio por ${encodeURIComponent(name)} (CP ${shipState.cp}) - $${shipState.cost.toLocaleString('es-AR')}`;
+  } else {
+    if (totalEl) totalEl.textContent = 'Consultable';
+    shipLine = '%0A%0AEntrega: Envío a domicilio (a cotizar)';
+  }
+
   // Build WhatsApp order request string
   const itemsList = cartItems.map(item => `• ${item.name} (${item.sizes}) x${item.qty}`).join('%0A');
-  const whatsappMsg = `Hola%20Mis%20Heroes!%20Quiero%20consultar%20estos%20productos%20%F0%9F%91%97%0A%0A${itemsList}%0A%0A%C2%BFMe%20pueden%20confirmar%20disponibilidad%20y%20precio%3F`;
+  const whatsappMsg = `Hola%20Mis%20Heroes!%20Quiero%20hacer%20este%20pedido%20%F0%9F%91%97%0A%0A${itemsList}${shipLine}%0A%0A%C2%BFMe%20confirman%20disponibilidad%20y%20total%3F`;
   const checkoutBtn = document.getElementById('waCheckoutBtn');
   if (checkoutBtn) {
     checkoutBtn.href = `https://wa.me/543415884977?text=${whatsappMsg}`;
